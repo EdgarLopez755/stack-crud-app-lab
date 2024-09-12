@@ -4,7 +4,13 @@ const app = express()
 const mongoose = require('mongoose')
 
 
+app.get('/test', (req, res) => {
+  res.send("testing server")
+})
 
+app.get('/', async (req, res) => {
+  res.render('index.ejs')
+})
 
 
 const foodSchema = new mongoose.Schema({
@@ -14,6 +20,7 @@ const foodSchema = new mongoose.Schema({
 })
 
 const Food = mongoose.model('Food', foodSchema)
+
 module.exports = Food
 
 
@@ -23,3 +30,6 @@ module.exports = Food
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
+
+
+
