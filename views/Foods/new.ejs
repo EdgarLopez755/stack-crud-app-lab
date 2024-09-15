@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foods To Eat</title>
+</head>
+<body>
+    <a href="/">Homepage</a>
+    <a href="/foods/">Back to Foods</a>
+    <h1>Add New Foods!</h1>
+    <form action="/foods" method="POST">
+        <label for='name'>Name:</label>
+        <input type='text' name="name" />
+
+        <label for="isReadyToEat">Ready To Eat</label>
+        <input type="checkbox" name="isReadyToEat" id="isReadyToEat"/>
+
+        <button type="submit">Add Food</button>
+    </form>
+    
+</body>
+</html>
