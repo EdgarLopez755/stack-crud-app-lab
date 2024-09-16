@@ -40,7 +40,7 @@ app.get('/foods/new', (req, res) => {
 })
 
 app.get('/foods/:foodId', async(req, res) => {
-    const foundFood = await Food.findById(req.params.fruitId)
+    const foundFood = await Food.findById(req.params.foodId)
     res.render('foods/show.ejs', { food: foundFood})
 })
 
@@ -60,7 +60,7 @@ app.put('/foods/:foodId', async(req, res) => {
 })
 
 app.delete('/foods/:foodId', async(req, res) => {
-    await Food.findByIdAndDelete(req.params.fruitId)
+    await Food.findByIdAndDelete(req.params.foodId)
     res.redirect('/foods')
 })
 
