@@ -29,7 +29,18 @@ app.get('/foods', async(req, res) => {
 })
 
 app.get('/foods/new', (req, res) => {
-    res.render('foods/new.ejs')
+    res.render('foods/new.ejs')   
+})
+
+app.post('/foods', async(req, res) => {
+    if(req.body.isReadyToEat === 'on'){
+        req.body.isReadyToEat = true
+    } else {
+        req.body.isReadyToEat = false
+    }
+
+    await Food.create(req.body)
+    res.redirect('/foods')
 })
 
 app.listen(3000, () => {
