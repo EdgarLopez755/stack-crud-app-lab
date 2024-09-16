@@ -32,6 +32,16 @@ app.get('/foods/new', (req, res) => {
     res.render('foods/new.ejs')   
 })
 
+app.get('/foods/:foodId', async(req, res) => {
+    const foundFood = await Food.findById(req.params.fruitId)
+    res.render('foods/show.ejs', {food: foundFood})
+})
+
+app.get('/foods/:foodId/edit', async(req, res) => {
+    const foundFood = await Fruit.findById(req.params.foodId)
+    res.render('foods/edit.ejs', {food: foundFood})
+})
+
 app.post('/foods', async(req, res) => {
     if(req.body.isReadyToEat === 'on'){
         req.body.isReadyToEat = true
