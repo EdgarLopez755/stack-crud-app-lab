@@ -10,21 +10,22 @@ const morgan = require('morgan')
 
 
 process.env.MONGODB_URI='mongodb+srv://edgarlopez755:zHGPeUzilXAYqOYc@student-cluster.z2jsf.mongodb.net/student-cluster?retryWrites=true&w=majority&appName=Student-cluster'
-    mongoose.connection.on('connected', () => {
-        console.log('Connected to MongoDB ')
-    })
-    
-
+mongoose.connection.on('connected', () => {
+    console.log('Connected to MongoDB ')
+})
 mongoose.connect(process.env.MONGODB_URI)   
-// const Food = mongoose.model('Food', foodSchema)
-// module.exports = Food
+
+
+
+
+
 const Food = require('./models/food.js')
 
-
+app.use(express.urlencoded({ extended: false}))
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 
-app.get('/', async(req, res) => {
+app.get('/', (req, res) => {
     res.render('index.ejs')
 })
 
@@ -40,12 +41,12 @@ app.get('/foods/new', (req, res) => {
 
 app.get('/foods/:foodId', async(req, res) => {
     const foundFood = await Food.findById(req.params.fruitId)
-    res.render('foods/show.ejs', {food: foundFood})
+    res.render('foods/show.ejs', { food: foundFood})
 })
 
 app.get('/foods/:foodId/edit', async(req, res) => {
     const foundFood = await Food.findById(req.params.foodId)
-    res.render('foods/edit.ejs', {food: foundFood})
+    res.render('foods/edit.ejs', { food: foundFood})
 })
 
 app.put('/foods/:foodId', async(req, res) => {
@@ -54,7 +55,7 @@ app.put('/foods/:foodId', async(req, res) => {
     } else {
         req.body.isReadyToEat = false
     }
-    await Food.findByIdAndDelete(req.params.foodId, req.body)
+    await Food.findByIdAndUpdate(req.params.foodId, req.body)
     res.redirect(`/foods/${req.params.foodId}`)
 })
 

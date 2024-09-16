@@ -3,7 +3,7 @@
     <a href="/foods/new">Add Food</a>
     <a href="/foods">Back to Food</a>
     <h1>Edit <%= food.name %></h1>
-    <form action="/foods/<%= food.id %>?_method=PUT" method="POST">
+    <form action="/foods/<%= food._id %>?_method=PUT" method="POST">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" value="<%= food.name %>"/>
 
@@ -11,7 +11,7 @@
         <input type="checkbox"
                name="isReadyToEat"
                id="isReadyToEat"
-               <% if (food.isReadyToEat){ %> checked <% } %>/>
+               <% if(food.isReadyToEat){ %> checked <% } %>/>
         <button type="submit">Update Food</button>
     </form>
 </body>
