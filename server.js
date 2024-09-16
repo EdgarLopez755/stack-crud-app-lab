@@ -3,7 +3,9 @@ dotenv.config()
 
 const express = require("express");
 const app = express();
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const methodOverride = require('method-override')
+const morgan = require('morgan')
 
 
 
@@ -17,6 +19,10 @@ mongoose.connect(process.env.MONGODB_URI)
 // const Food = mongoose.model('Food', foodSchema)
 // module.exports = Food
 const Food = require('./models/food.js')
+
+
+app.use(methodOverride('_method'))
+app.use(morgan('dev'))
 
 app.get('/', async(req, res) => {
     res.render('index.ejs')
@@ -50,6 +56,11 @@ app.put('/foods/:foodId', async(req, res) => {
     }
     await Food.findByIdAndDelete(req.params.foodId, req.body)
     res.redirect(`/foods/${req.params.foodId}`)
+})
+
+app.delete('/foods/:foodId', async(req, res) => {
+    await Food.findByIdAndDelete(req.params.fruitId)
+    res.redirect('/foods')
 })
 
 app.post('/foods', async(req, res) => {
