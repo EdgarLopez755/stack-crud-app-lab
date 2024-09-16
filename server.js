@@ -20,7 +20,7 @@ const Food = require('./models/food.js')
 
 app.get('/', async(req, res) => {
     res.render('index.ejs')
-});
+})
 
 app.get('/foods', async(req, res) => {
     const allFoods = await Food.find()
@@ -38,8 +38,18 @@ app.get('/foods/:foodId', async(req, res) => {
 })
 
 app.get('/foods/:foodId/edit', async(req, res) => {
-    const foundFood = await Fruit.findById(req.params.foodId)
+    const foundFood = await Food.findById(req.params.foodId)
     res.render('foods/edit.ejs', {food: foundFood})
+})
+
+app.put('/foods/:foodId', async(req, res) => {
+    if(req.body.isReadyToEat === 'on'){
+        req.body.isReadyToEat = true 
+    } else {
+        req.body.isReadyToEat = false
+    }
+    await Food.findByIdAndDelete(req.params.foodId, req.body)
+    res.redirect(`/foods/${req.params.foodId}`)
 })
 
 app.post('/foods', async(req, res) => {
