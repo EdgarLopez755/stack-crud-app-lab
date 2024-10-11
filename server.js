@@ -19,61 +19,90 @@ mongoose.connect(process.env.MONGODB_URI)
 
 
 
-const Food = require('./models/food.js')
+const Shoe = require('./models/shoes.js')
 
 app.use(express.urlencoded({ extended: false}))
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 
+
+
+
 app.get('/', (req, res) => {
     res.render('index.ejs')
 })
 
-app.get('/foods', async(req, res) => {
-    const allFoods = await Food.find()
-    console.log(allFoods)
-    res.render('foods/index.ejs', {foods: allFoods})
+
+
+
+app.get('/shoes', async(req, res) => {
+    const allShoes = await Shoe.find()
+    console.log(allShoes)
+    res.render('shoes/index.ejs', {shoes: allShoes})
 })
 
-app.get('/foods/new', (req, res) => {
-    res.render('foods/new.ejs')   
+
+
+
+
+app.get('/shoes/new', (req, res) => {
+    res.render('shoes/new.ejs')   
 })
 
-app.get('/foods/:foodId', async(req, res) => {
-    const foundFood = await Food.findById(req.params.foodId)
-    res.render('foods/show.ejs', { food: foundFood})
+
+
+
+app.get('/shoes/:shoeId', async(req, res) => {
+    const foundShoe = await Shoe.findById(req.params.shoeId)
+    res.render('shoes/show.ejs', { shoe: foundShoe})
 })
 
-app.get('/foods/:foodId/edit', async(req, res) => {
-    const foundFood = await Food.findById(req.params.foodId)
-    res.render('foods/edit.ejs', { food: foundFood})
+
+
+
+
+app.get('/shoes/:shoeId/edit', async(req, res) => {
+    const foundShoe = await Shoe.findById(req.params.shoeId)
+    res.render('Shoes/edit.ejs', { shoe: foundShoe})
 })
 
-app.put('/foods/:foodId', async(req, res) => {
-    if(req.body.isReadyToEat === 'on'){
-        req.body.isReadyToEat = true 
+
+
+
+
+app.put('/shoes/:shoeId', async(req, res) => {
+    if(req.body.isReadyToBuy === 'on'){
+        req.body.isReadyToBuy = true 
     } else {
-        req.body.isReadyToEat = false
+        req.body.isReadyToBuy = false
     }
-    await Food.findByIdAndUpdate(req.params.foodId, req.body)
-    res.redirect(`/foods/${req.params.foodId}`)
+    await Shoe.findByIdAndUpdate(req.params.shoeId, req.body)
+    res.redirect(`/shoes/${req.params.shoeId}`)
 })
 
-app.delete('/foods/:foodId', async(req, res) => {
-    await Food.findByIdAndDelete(req.params.foodId)
-    res.redirect('/foods')
+
+
+
+app.delete('/shoes/:shoeId', async(req, res) => {
+    await Shoe.findByIdAndDelete(req.params.shoeId)
+    res.redirect('/shoes')
 })
 
-app.post('/foods', async(req, res) => {
-    if(req.body.isReadyToEat === 'on'){
-        req.body.isReadyToEat = true
+
+
+app.post('/shoes', async(req, res) => {
+    if(req.body.isReadyToBuy === 'on'){
+        req.body.isReadyToBuy = true
     } else {
-        req.body.isReadyToEat = false
+        req.body.isReadyToBuy = false
     }
 
-    await Food.create(req.body)
-    res.redirect('/foods')
+    await Shoe.create(req.body)
+    res.redirect('/shoes')
 })
+
+
+
 
 app.listen(3000, () => {
     console.log("Listening on port 3000");

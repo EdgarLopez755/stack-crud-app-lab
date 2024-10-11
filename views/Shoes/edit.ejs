@@ -1,0 +1,20 @@
+<body>
+    <a href="/">Homepage</a>
+    <a href="/shoes/new">Add Shoe</a>
+    <a href="/shoes">Back to Shoe</a>
+    <h1>Edit <%= shoe.name %></h1>
+    <form action="/shoes/<%= shoe._id %>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="<%= shoe.name %>"/>
+
+        
+
+        <label for="isReadyToBuy">Ready to Cop!</label>
+        <input type="checkbox"
+               name="isReadyToBuy"
+               id="isReadyToBuy"
+               <% if(shoe.isReadyToBuy){ %> checked <% } %>/>
+        <button type="submit">Update Shoes</button>
+    </form>
+</body>
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <title><%= shoe.name %></title>
+  </head>
+<body>
+    <a href="/">Homepage</a>
+    <a href="/shoes/new">Add New Kicks</a>
+    <a href="/shoes/">Back to Shoes</a>
+    <h1><%= shoe.name %></h1>
+    <% if (shoe.isReadyToBuy) { %> 
+        <p> These kicks are ready to rock ! </p>
+    <% } else { %>
+        <p> These kicks are not on feet yet !</p>
+    <% } %>
+
+    <form action="/shoes/<%=shoe._id%>?_method=DELETE" method="POST">
+        
+        <button type="submit">Delete <%= shoe.name %></button>
+    </form>
+    
+    <a href="/shoes/<%= shoe._id %>/edit">Edit <%= shoe.name %></a>
+    <a href="/shoes">Back to Shoes</a>
+    
+</body>
+</html>

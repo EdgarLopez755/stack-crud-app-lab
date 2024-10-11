@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Shoes</title>
+</head>
+<body>
+    <a href="/">Homepage</a>
+    <a href="/shoes/">Back to Shoes</a>
+    <h1>Add New Kicks!</h1>
+    <form action="/shoes" method="POST">
+        <label for='name'>Name:</label>
+        <input type='text' name="name" />
+
+        <label for="isReadyToBuy">Ready To Buy</label>
+        <input type="checkbox" name="isReadyToBuy" id="isReadyToBuy"/>
+
+        <button type="submit">Add Shoe</button>
+    </form>
+    
+</body>
+</html>
